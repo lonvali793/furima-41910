@@ -14,6 +14,7 @@
 |year               |integer| null:false|
 |month              |integer| null:false|
 |day                |integer| null:false|
+
 ### Association
 
 - has_many :items
@@ -46,8 +47,8 @@
 -belongs_to :item
 
 カード情報：card_number　DBには記載しない。
-有効期限：　expiration_date　DBには記載しない。
-セキュリティコード：　security_code　DBには記載しない。
+有効期限：expiration_date　DBには記載しない。
+セキュリティコード：security_code　DBには記載しない。
 
 
 ##adresses テーブル
