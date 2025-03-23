@@ -15,7 +15,7 @@
 ### Association
 
 - has_many :items
-- has_one :order
+- has_many :orders
 
 ## items　テーブル
 | Column        | Type    | Options     |
@@ -29,7 +29,7 @@
 |delivery_time_id  |integer  |null:false|
 |price            |integer  | null:false|
 |user              |references |null: false, foreign_key: true |
-※imageはactivestorageで実装
+
 
 
 ### Association
