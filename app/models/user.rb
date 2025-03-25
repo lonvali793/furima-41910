@@ -9,7 +9,7 @@ class User < ApplicationRecord
          validates :surname_kana, presence: true
          validates :firstname_kana, presence: true
          validates :birthday, presence: true
-         validates :email, presence: true, format: { with: /@/, message: "Emailには@ を含めてください" }
+         validates :email, presence: true, format: { with: /@/, message: "@ を含めてください" }
          validates :password, presence: true, length: { minimum: 6}
 end
 
