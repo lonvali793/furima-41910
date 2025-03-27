@@ -12,6 +12,11 @@ RSpec.describe User, type: :model do
         expect(user.firstname.match?(/\A[ぁ-んァ-ヶ一-龥々ー]+\z/)).to be true
         expect(user).to be_valid
       end
+      it "名字が漢字とひらがなとカタカナのみで構成されている場合は登録できる" do
+        user = FactoryBot.build(:user, surname: Faker::Japanese::Name.last_name)
+        expect(user.surname.match?(/\A[ぁ-んァ-ヶ一-龥々ー]+\z/)).to be true
+        expect(user).to be_valid
+      end
 
       it "パスワードが一致したら登録できる" do
         user = FactoryBot.build(:user, password: "password123", password_confirmation: "password123")
@@ -21,6 +26,16 @@ RSpec.describe User, type: :model do
       it "パスワードがアルファベットと数字の混合の場合は登録できる" do
         user = FactoryBot.build(:user, password: "password123", password_confirmation: "password123")
         expect(user.password.match?(/\A(?=.*[a-zA-Z])(?=.*\d)[a-zA-Z\d]+\z/)).to be true
+        expect(user).to be_valid
+      end
+      it "名前カナがカタカナのみで構成されている場合は登録できる" do
+        user = FactoryBot.build(:user, firstname_kana: "タナカ")
+        expect(user.firstname_kana.match?(/\A[ァ-ヶー]+\z/)).to be true
+        expect(user).to be_valid
+      end
+      it "名字カナがカタカナのみで構成されている場合は登録できる" do
+        user = FactoryBot.build(:user, surname_kana: "イチロウ")
+        expect(user.surname_kana.match?(/\A[ァ-ヶー]+\z/)).to be true
         expect(user).to be_valid
       end
     end
