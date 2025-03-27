@@ -9,7 +9,6 @@ class User < ApplicationRecord
          validates :surname_kana, presence: true
          validates :firstname_kana, presence: true
          validates :birthday, presence: true
-         validates :password, presence: true
 
          with_options presence: true do
           # ひらがな、カタカナ、漢字のみ許可する

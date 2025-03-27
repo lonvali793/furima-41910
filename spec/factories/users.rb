@@ -2,7 +2,7 @@ FactoryBot.define do
   factory :user do
     nickname { Faker::Name.unique.first_name }  # ランダムな名前
     email { Faker::Internet.email }      # ランダムなメールアドレス
-    password { Faker::Internet.password(min_length: 6) }  # 8文字以上のランダムなパスワード
+    password { '1a' + Faker::Internet.password(min_length: 4) } # 6文字以上のランダムなパスワード
     password_confirmation { password }  # 確認用パスワードも同じ値にする
 
     surname {Faker::Japanese::Name.last_name }       
