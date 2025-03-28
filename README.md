@@ -47,7 +47,7 @@
 - belongs_to :item
 - has_one :address
 
-カード情報：card_number　DBには記載しない。
+カード情報：card_number　DBには記載しない
 有効期限：　expiration_date　DBには記載しない。
 セキュリティコード：　security_code　DBには記載しない。
 
