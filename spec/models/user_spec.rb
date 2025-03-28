@@ -6,39 +6,12 @@ RSpec.describe User, type: :model do
 
   describe 'ユーザー新規登録' do
     context '新規登録できる場合' do
- 
-      it "名前が漢字とひらがなとカタカナのみで構成されている場合は登録できる" do
-        user = FactoryBot.build(:user, firstname: Faker::Japanese::Name.first_name)
-        expect(user.firstname.match?(/\A[ぁ-んァ-ヶ一-龥々ー]+\z/)).to be true
-        expect(user).to be_valid
-      end
-      it "名字が漢字とひらがなとカタカナのみで構成されている場合は登録できる" do
-        user = FactoryBot.build(:user, surname: Faker::Japanese::Name.last_name)
-        expect(user.surname.match?(/\A[ぁ-んァ-ヶ一-龥々ー]+\z/)).to be true
-        expect(user).to be_valid
-      end
 
-      it "パスワードが一致したら登録できる" do
-        user = FactoryBot.build(:user, password: "password123", password_confirmation: "password123")
-        expect(user).to be_valid
-      end
-
-      it "パスワードがアルファベットと数字の混合の場合は登録できる" do
-        user = FactoryBot.build(:user, password: "password123", password_confirmation: "password123")
-        expect(user.password.match?(/\A(?=.*[a-zA-Z])(?=.*\d)[a-zA-Z\d]+\z/)).to be true
-        expect(user).to be_valid
-      end
-      it "名前カナがカタカナのみで構成されている場合は登録できる" do
-        user = FactoryBot.build(:user, firstname_kana: "タナカ")
-        expect(user.firstname_kana.match?(/\A[ァ-ヶー]+\z/)).to be true
-        expect(user).to be_valid
-      end
-      it "名字カナがカタカナのみで構成されている場合は登録できる" do
-        user = FactoryBot.build(:user, surname_kana: "イチロウ")
-        expect(user.surname_kana.match?(/\A[ァ-ヶー]+\z/)).to be true
-        expect(user).to be_valid
-      end
+      it 'すべての条件が一致した場合は新規登録できる'do
+    expect(@user).to be_valid
     end
+  end
+     
      
     context '新規登録できない場合' do
 
@@ -109,36 +82,66 @@ RSpec.describe User, type: :model do
     end
 
     it "名前に数字が入っている場合は登録できない" do
-      user = FactoryBot.build(:user, firstname: "#{Faker::Japanese::Name.first_name}123")
-      expect(user).not_to be_valid
+      @user = FactoryBot.build(:user, firstname: "太郎123")
+      expect(@user).not_to be_valid
     end
 
     it "名前にアルファベットが入っている場合は登録できない" do
-      user = FactoryBot.build(:user, firstname: "#{Faker::Japanese::Name.first_name}abc")
-      expect(user).not_to be_valid
+      @user = FactoryBot.build(:user, firstname: "太郎abc")
+      expect(@user).not_to be_valid
     end
   
     it "名字に数字が入っている場合は登録できない" do
-      user = FactoryBot.build(:user, surname: "#{Faker::Japanese::Name.last_name}123")
-      expect(user).not_to be_valid
+      @user = FactoryBot.build(:user, surname: "山田123")
+      expect(@user).not_to be_valid
     end
 
-    it "名前にアルファベットが入っている場合は登録できない" do
-      user = FactoryBot.build(:user, surname: "#{Faker::Japanese::Name.last_name}abc")
-      expect(user).not_to be_valid
+    it "名字にアルファベットが入っている場合は登録できない" do
+      @user = FactoryBot.build(:user, surname: "山田abc")
+      expect(@user).not_to be_valid
+    end
+
+    it "名前カナに数字が入っている場合は登録できない" do
+      @user = FactoryBot.build(:user, firstname_kana: "タロウ123")
+      expect(@user).not_to be_valid
+    end
+
+    it "名前カナにアルファベットが入っている場合は登録できない" do
+      @user = FactoryBot.build(:user, firstname_kana: "タロウabc")
+      expect(@user).not_to be_valid
+    end
+
+    it "名前カナに漢字が入っている場合は登録できない" do
+      @user = FactoryBot.build(:user, firstname_kana: "タロウ太郎")
+      expect(@user).not_to be_valid
+    end
+
+    it "名字カナに数字が入っている場合は登録できない" do
+      @user = FactoryBot.build(:user, surname_kana: "ヤマダ123")
+      expect(@user).not_to be_valid
+    end
+
+    it "名字カナにアルファベットが入っている場合は登録できない" do
+      @user = FactoryBot.build(:user, surname_kana: "ヤマダabc")
+      expect(@user).not_to be_valid
+    end
+    
+    it "名字カナに漢字が入っている場合は登録できない" do
+      @user = FactoryBot.build(:user, surname_kana: "ヤマダ山田")
+      expect(@user).not_to be_valid
     end
 
     it "パスワードが数字のみの場合は登録できない" do
-      user = FactoryBot.build(:user, password: "1234567", password_confirmation: "1234567")
-      expect(user).not_to be_valid
+      @user = FactoryBot.build(:user, password: "1234567", password_confirmation: "1234567")
+      expect(@user).not_to be_valid
     end
+
     
     it "パスワードがアルファベットのみの場合は登録できない" do
-      user = FactoryBot.build(:user, password: "abcdefg", password_confirmation: "abcdefg")
-      expect(user).not_to be_valid
+      @user = FactoryBot.build(:user, password: "abcdefg", password_confirmation: "abcdefg")
+      expect(@user).not_to be_valid
     end
   end
-
-  end
+end
 end
 
