@@ -12,8 +12,8 @@ class User < ApplicationRecord
 
          with_options presence: true do
           # ひらがな、カタカナ、漢字のみ許可する
-          validates :firstname, format: {with: /\A[ぁ-んァ-ヶ一-龥々ー]+\z/, message: "is invalid. Input full-width characters."}
-          validates :surname, format: {with: /\A[ぁ-んァ-ヶ一-龥々ー]+\z/, message: "is invalid. Input full-width characters."}
+          validates :firstname, format: {with: /\A[ぁ-んァ-ヶ一-龥々ー]+\z/, message: "is invalid.Input full-width kanji and hiragana characters."}
+          validates :surname, format: {with: /\A[ぁ-んァ-ヶ一-龥々ー]+\z/, message: "is invalid. Input full-width kanji and hiragana characters."}
           # カタカナのみ許可する
           validates :firstname_kana, format: {with: /\A[ァ-ヶー]+\z/, message: "is invalid. Input full-width katakana characters."}
           validates :surname_kana, format: {with: /\A[ァ-ヶー]+\z/, message: "is invalid. Input full-width katakana characters."}
