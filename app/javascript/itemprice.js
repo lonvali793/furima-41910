@@ -9,12 +9,11 @@ const price = () => {
 
   priceInput.addEventListener("input", () => {
     const inputValue = Number(priceInput.value);
-    console.log(inputValue);
     const addTaxDom = Math.floor(inputValue * 0.1)
     taxPrice.innerHTML =  addTaxDom
     const addProfit = inputValue - addTaxDom
     itemprofit.innerHTML = addProfit
-    console.log(addProfit);
+
     })
 
 };

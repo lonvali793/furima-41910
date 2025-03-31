@@ -74,9 +74,25 @@ context '商品が出品できない場合' do
     expect(@item.errors.full_messages).to include ("Item name is too long (maximum is 40 characters)")
   end
   it 'item_contentが1001文字以上では登録できない' do
-    @item.item_name = "あ"*1001
+    @item.item_content = "あ"*1001
     @item.valid?
     expect(@item.errors.full_messages).to include ("Item content is too long (maximum is 1000 characters)")
+  end
+
+  it 'priceが空では登録できない' do
+    @item.price = ''  
+    @item.valid?
+    expect(@item.errors.full_messages).to include ("Price can't be blank")
+  end
+  it 'priceに半角数字以外が含まれている場合は出品できない' do
+    @item.price = '301a'  
+    @item.valid?
+    expect(@item.errors.full_messages).to include ("Price is invalid.enter the price in half-width alphanumeric characters, within the range of 300 yen to 9,999,999 yen.")
+  end
+  it 'userが紐付いていないと保存できない' do
+    @item.user = nil 
+    @item.valid?
+    expect(@item.errors.full_messages).to include ("User must exist")
   end
 
 end
