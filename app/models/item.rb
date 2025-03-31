@@ -4,13 +4,13 @@ has_one :order
 has_one_attached :image
 
 validates :image, presence: true 
-validates :item_name, presence: true
-validates :item_content, presence: true
+validates :item_name, presence: true, length: { minimum: 1, maximum: 40 }
+validates :item_content, presence: true, length: { minimum: 1, maximum: 1000 }
 validates :item_category_id, numericality: { other_than: 1 ,message: "can't be blank"} 
-validates :item_condition_id, presence: true
-validates :shipping_cost_id, presence: true
-validates :prefecture_id, presence: true
-validates :delivery_time_id, presence: true
+validates :item_condition_id, numericality: { other_than: 1 ,message: "can't be blank"} 
+validates :shipping_cost_id, numericality: { other_than: 1 ,message: "can't be blank"} 
+validates :prefecture_id, numericality: { other_than: 1 ,message: "can't be blank"} 
+validates :delivery_time_id, numericality: { other_than: 1 ,message: "can't be blank"} 
 validates :price, presence: true, numericality: { only_integer: true, 
 greater_than_or_equal_to: 300, 
 less_than_or_equal_to: 9999999, message: 'is invalid.enter the price in half-width alphanumeric characters, within the range of 300 yen to 9,999,999 yen.'
