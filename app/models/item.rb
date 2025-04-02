@@ -9,7 +9,7 @@ validates :item_content, presence: true, length: { minimum: 1, maximum: 1000 }
 validates :item_category_id, numericality: { other_than: 1 ,message: "can't be blank"} 
 validates :item_condition_id, numericality: { other_than: 1 ,message: "can't be blank"} 
 validates :shipping_cost_id, numericality: { other_than: 1 ,message: "can't be blank"} 
-validates :prefecture_id, numericality: { other_than: 1 ,message: "can't be blank"} 
+validates :prefecture_id, numericality: { other_than: 0 ,message: "can't be blank"} 
 validates :delivery_time_id, numericality: { other_than: 1 ,message: "can't be blank"} 
 validates :price, presence: true, numericality: { only_integer: true, 
 greater_than_or_equal_to: 300, 
