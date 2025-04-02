@@ -1,5 +1,6 @@
 class ItemsController < ApplicationController
   before_action :authenticate_user!, except: [:index, :show ]
+  before_action  :set, only: [:edit, :update]
   
   def index
     @items = Item.includes(:user).order(created_at: :desc)
@@ -14,21 +15,22 @@ class ItemsController < ApplicationController
 end
 
 def edit
-
-  @item = Item.find(params[:id])
   unless current_user.id == @item.user_id
     redirect_to root_path
 end
 end
 
+
 def update
-@item = Item.find(params[:id])
-Rails.logger.debug "PARAMS: #{params.inspect}" # 
 if @item.update(item_params)
   redirect_to item_path(@item.id)
 else
   render :edit,status: :unprocessable_entity
 end
+end
+
+def set
+  @item = Item.find(params[:id])
 end
 
 
@@ -39,11 +41,7 @@ if @item.save
 else
   render :new, status: :unprocessable_entity
 end
-
 end
-
-
-
 
 
 private
