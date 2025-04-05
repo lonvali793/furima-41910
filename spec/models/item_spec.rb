@@ -47,8 +47,8 @@ context '商品が出品できない場合' do
     @item.valid?
     expect(@item.errors.full_messages).to include ("Shipping cost can't be blank")
   end
-  it 'prefecture_idが1（項目を選択しない）時は登録できない' do
-    @item.prefecture_id = 1  
+  it 'prefecture_idが0（項目を選択しない）時は登録できない' do
+    @item.prefecture_id = 0  
     @item.valid?
     expect(@item.errors.full_messages).to include ("Prefecture can't be blank")
   end

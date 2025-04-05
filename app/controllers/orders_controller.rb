@@ -3,13 +3,13 @@ class OrdersController < ApplicationController
 
   def index
      @item = Item.find(params[:item_id])
-    if current_user.id == @item.user_id || if @item.order.present? 
+    if current_user.id == @item.user_id || @item.order.present? 
       redirect_to root_path     
     end
-  end
   gon.public_key = ENV["PAYJP_PUBLIC_KEY"]
   @order_address = OrderAddress.new
-end
+  end
+
 
   def create
     @item = Item.find(params[:item_id])

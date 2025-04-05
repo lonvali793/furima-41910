@@ -39,7 +39,7 @@ ActiveRecord::Schema[7.1].define(version: 2025_04_04_102938) do
     t.index ["blob_id", "variation_digest"], name: "index_active_storage_variant_records_uniqueness", unique: true
   end
 
-  create_table "addresses", charset: "utf8mb3", collation: "utf8mb3_general_mysql500_ci", force: :cascade do |t|
+  create_table "addresses", charset: "utf8mb3", force: :cascade do |t|
     t.string "postal_code", null: false
     t.integer "prefecture_id", null: false
     t.string "city", null: false
@@ -67,7 +67,7 @@ ActiveRecord::Schema[7.1].define(version: 2025_04_04_102938) do
     t.index ["user_id"], name: "index_items_on_user_id"
   end
 
-  create_table "orders", charset: "utf8mb3", collation: "utf8mb3_general_mysql500_ci", force: :cascade do |t|
+  create_table "orders", charset: "utf8mb3", force: :cascade do |t|
     t.bigint "user_id", null: false
     t.bigint "item_id", null: false
     t.datetime "created_at", null: false
