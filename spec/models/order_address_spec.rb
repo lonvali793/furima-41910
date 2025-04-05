@@ -3,19 +3,9 @@ RSpec.describe OrderAddress, type: :model do
   before do
     @user = FactoryBot.create(:user)
     @item = FactoryBot.create(:item)
-    @order_address = OrderAddress.new(
-      postal_code: "123-4567",
-      prefecture_id: 1,
-      city: "中山市",
-      house_number: "中田1-1-1",
-      building_name: "中川ビル101",
-      phone_number: "09012345678",
-      token: "tok_abcdefghijk00000000000000000",
-      user_id: @user.id,
-      item_id: @item.id
-    )
-
+    @order_address = FactoryBot.build(:order_address, user_id: @user.id,item_id: @item.id)
   end
+  
 
   describe '購入情報の保存' do
     context '購入ができる' do
@@ -90,6 +80,11 @@ RSpec.describe OrderAddress, type: :model do
         @order_address.item_id = nil
         @order_address.valid?
         expect(@order_address.errors.full_messages).to include("Item can't be blank")
+      end
+      it '郵便番号はハイフンを含めた3桁-4桁ではないと保存できない' do
+        @order_address.postal_code = '1234567'
+        @order_address.valid?
+        expect(@order_address.errors.full_messages).to include("Postal code は 123-4567 の形式で入力してください")
       end
 
     end
